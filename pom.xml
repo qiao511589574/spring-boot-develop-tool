@@ -61,6 +61,7 @@
 
     <modules>
         <module>spring-boot-develop-tool-portal</module>
+        <module>spring-boot-develop-tool-storage</module>
     </modules>
 
 
