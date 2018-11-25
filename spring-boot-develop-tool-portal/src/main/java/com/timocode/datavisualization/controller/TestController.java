@@ -28,7 +28,7 @@ public class TestController {
         timoUser.setUserWeight(new BigDecimal(45));
         timoUser.setUserPassword("123456");
         System.out.println("test1");
-        Integer i= timoUserService.addTimeUser(timoUser);
+        Integer i= timoUserService.addTimoUser(timoUser);
         System.out.println(i);
         return i.toString();
     }

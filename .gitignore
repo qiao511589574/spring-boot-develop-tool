@@ -1,7 +1,14 @@
 # Created by .ignore support plugin (hsz.mobi)
 .gitignore
 .idea/
-.iml
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
 /target/
 /spring-boot-develop-tool-storage/target/
+
 /spring-boot-develop-tool-storage/spring-boot-develop-tool-storage.iml
