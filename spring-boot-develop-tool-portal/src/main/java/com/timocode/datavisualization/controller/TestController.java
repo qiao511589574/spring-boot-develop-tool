@@ -1,25 +1,25 @@
-package com.timocode.datavisualization.springbootdeveloptoolprotal;
+package com.timocode.datavisualization.controller;
 
 import com.timocode.datavisualization.develop.storage.entity.TimoUser;
 import com.timocode.datavisualization.develop.storage.service.TimoUserService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class ApplicationTests {
+@Controller
+@RequestMapping("/test")
+public class TestController {
     @Autowired
     private TimoUserService timoUserService;
 
-    @Test
-    public void TimoUserAddTest(){
+    @RequestMapping("/addUser")
+    @ResponseBody
+    public String addUser(){
         TimoUser timoUser = new TimoUser();
-        timoUser.setId(1);
+        timoUser.setId(4);
         timoUser.setUserId("timo1");
         timoUser.setUserAge(11);
         timoUser.setUserEmail("123456789@qq.com");
@@ -28,8 +28,8 @@ public class ApplicationTests {
         timoUser.setUserWeight(new BigDecimal(45));
         timoUser.setUserPassword("123456");
         System.out.println("test1");
-        int i= timoUserService.addTimeUser(timoUser);
+        Integer i= timoUserService.addTimeUser(timoUser);
         System.out.println(i);
+        return i.toString();
     }
-
 }
