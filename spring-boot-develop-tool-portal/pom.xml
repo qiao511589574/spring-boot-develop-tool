@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.timocode.datavisualization</groupId>
+    <groupId>com.timocode.portal</groupId>
     <artifactId>spring-boot-develop-tool-portal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>spring-boot-develop-tool-portal</name>
-    <description>data visualization portal</description>
+    <description>portal module</description>
 
     <parent>
         <groupId>com.timocode</groupId>
@@ -37,12 +37,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.timocode.datavisualization</groupId>
-            <artifactId>spring-boot-develop-tool-storage</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -51,6 +45,18 @@
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
             <scope>provided</scope>
+        </dependency>
+
+
+        <!-- module dependency-->
+        <dependency>
+            <groupId>com.timocode.storage</groupId>
+            <artifactId>spring-boot-develop-tool-storage</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId></groupId>
+            <artifactId></artifactId>
         </dependency>
     </dependencies>
 

@@ -20,7 +20,6 @@
         <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
         <mybatis.version>1.3.2</mybatis.version>
         <spring-boot-maven-plugin.version>2.1.0.RELEASE</spring-boot-maven-plugin.version>
-        <spring-boot-redis-version>1.5.13.RELEASE</spring-boot-redis-version>
     </properties>
 
     <dependencyManagement>
@@ -53,11 +52,6 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-redis</artifactId>
-                <version>${spring-boot-redis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
@@ -67,6 +61,8 @@
     <modules>
         <module>spring-boot-develop-tool-portal</module>
         <module>spring-boot-develop-tool-storage</module>
+        <module>spring-boot-develop-tool-common</module>
+        <module>spring-boot-develop-tool-redis</module>
     </modules>
 
 

@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.timocode.datavisualization</groupId>
+    <groupId>com.timocode.storage</groupId>
     <artifactId>spring-boot-develop-tool-storage</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <name>spring-boot-develop-tool-storage</name>
-    <description>data visualization storage</description>
+    <description>storage module</description>
 
     <parent>
         <groupId>com.timocode</groupId>
@@ -63,23 +63,20 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- AOP -->
+
+        <!--module依赖-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <groupId>com.timocode.common</groupId>
+            <artifactId>spring-boot-develop-tool-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.timocode.redis</groupId>
+            <artifactId>spring-boot-develop-tool-redis</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>4.3.13.RELEASE</version>
-        </dependency>
+
 
     </dependencies>
 
