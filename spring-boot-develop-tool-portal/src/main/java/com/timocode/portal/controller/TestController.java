@@ -32,4 +32,10 @@ public class TestController {
         System.out.println(i);
         return i.toString();
     }
+
+    @RequestMapping("/getUserList")
+    @ResponseBody
+    public Object getUserList(){
+        return timoUserService.getTimoUserList(1);
+    }
 }
