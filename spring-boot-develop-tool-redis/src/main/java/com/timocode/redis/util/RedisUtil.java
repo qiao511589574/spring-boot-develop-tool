@@ -37,7 +37,6 @@ public final class RedisUtil {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("expire异常,key:{},time:{}",key,time,e);
             return false;
         }
@@ -56,7 +55,6 @@ public final class RedisUtil {
         try {
             return redisTemplate.hasKey(key);
         } catch (Exception e){
-            e.printStackTrace();
             log.error("hasKey异常,key:{}",key,e);
             return false;
         }
@@ -99,7 +97,6 @@ public final class RedisUtil {
             redisTemplate.opsForValue().set(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("set异常，key:{},value:{}",key,value,e);
             return false;
         }
@@ -121,7 +118,6 @@ public final class RedisUtil {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("set异常，key:{},value:{},time:{}",key,value,time,e);
             return false;
         }
@@ -185,7 +181,6 @@ public final class RedisUtil {
             redisTemplate.opsForHash().putAll(key, map);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("hmset异常,key:{},map:{}",key,map,e);
             return false;
         }
@@ -206,7 +201,6 @@ public final class RedisUtil {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("hmset异常,key:{},map:{},time:{}",key,map,time,e);
             return false;
         }
@@ -224,7 +218,6 @@ public final class RedisUtil {
             redisTemplate.opsForHash().put(key, item, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("hset异常,key:{},item:{},value:{}",key,item,value,e);
             return false;
         }
@@ -246,7 +239,6 @@ public final class RedisUtil {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("hset异常,key:{},item:{},value:{},time:{}",key,item,value,time,e);
             return false;
         }
@@ -291,7 +283,6 @@ public final class RedisUtil {
         try {
             return redisTemplate.opsForSet().members(key);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -305,7 +296,6 @@ public final class RedisUtil {
         try {
             return redisTemplate.opsForSet().isMember(key, value);
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("sHasKey异常,key:{},value:{}",key,value,e);
             return false;
         }
@@ -320,7 +310,6 @@ public final class RedisUtil {
         try {
             return redisTemplate.opsForSet().add(key, values);
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("sSet异常,key:{},values:{}",key,values,e);
             return 0;
         }
@@ -341,7 +330,6 @@ public final class RedisUtil {
             return count;
         } catch (Exception e) {
             log.error("sSetAndTime异常,key:{},time:{},values:{}",key,time,values,e);
-            e.printStackTrace();
             return 0;
         }
     }
@@ -354,7 +342,6 @@ public final class RedisUtil {
         try {
             return redisTemplate.opsForSet().size(key);
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("sGetSetSize异常,key:{}",key,e);
             return 0;
         }
@@ -370,7 +357,6 @@ public final class RedisUtil {
             Long count = redisTemplate.opsForSet().remove(key, values);
             return count;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("setRemove异常,key:{},values:{}",key,values,e);
             return 0;
         }
@@ -387,7 +373,6 @@ public final class RedisUtil {
         try {
             return redisTemplate.opsForList().range(key, start, end);
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("lGet异常,key:{},start:{},end:{}",key,start,end,e);
             return null;
         }
@@ -401,7 +386,6 @@ public final class RedisUtil {
         try {
             return redisTemplate.opsForList().size(key);
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("lGetListSize异常,key:{}",key, e);
             return 0;
         }
@@ -416,7 +400,6 @@ public final class RedisUtil {
         try {
             return redisTemplate.opsForList().index(key, index);
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("lGetIndex异常,key:{},index:{}",key,index);
             return null;
         }
@@ -432,7 +415,6 @@ public final class RedisUtil {
             redisTemplate.opsForList().rightPush(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("lSet异常,key:{},value:{}",key,value,e);
             return false;
         }
@@ -452,7 +434,6 @@ public final class RedisUtil {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("lSet异常,key:{},value:{},time:{}",key, value, time, e);
             return false;
         }
@@ -468,7 +449,6 @@ public final class RedisUtil {
             redisTemplate.opsForList().rightPushAll(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("lSet异常,key:{},value:{}",key, value, e);
             return false;
         }
@@ -489,7 +469,6 @@ public final class RedisUtil {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("lSet异常,key:{},value:{},time:{}",key, value, time, e);
             return false;
         }
@@ -507,7 +486,6 @@ public final class RedisUtil {
             redisTemplate.opsForList().set(key, index, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("lUpdateIndex异常,key:{},index:{},value:{}",key, index, value, e);
             return false;
         }
@@ -524,7 +502,6 @@ public final class RedisUtil {
             Long remove = redisTemplate.opsForList().remove(key, count, value);
             return remove;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("lRemove异常,key:{},count:{},value:{}",key, count, value, e);
             return 0;
         }

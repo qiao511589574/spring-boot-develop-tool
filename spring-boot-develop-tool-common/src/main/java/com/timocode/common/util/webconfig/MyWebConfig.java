@@ -1,6 +1,10 @@
-package com.timocode.common.util.filter;
+package com.timocode.common.util.webconfig;
 
+import com.timocode.common.util.webconfig.filter.MyLoginFilter;
+import com.timocode.common.util.webconfig.interceptor.MyLoginInterceptor;
+import com.timocode.common.util.webconfig.sessionListener.MyHttpSessionListener;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -16,9 +20,30 @@ import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.List;
 
+/**
+ * filter注册配置类
+ * sessionListener注册配置类
+ */
+
 @Configuration
 @Slf4j
 public class MyWebConfig implements WebMvcConfigurer {
+
+    //注入拦截器
+    @Autowired
+    private MyLoginInterceptor myLoginInterceptor;
+
+    //配置静态资源，html,js,css等
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry resourceHandlerRegistry) {
+
+    }
+    //注册拦截器，自定义拦截器必须在此注册才能生效
+    @Override
+    public void addInterceptors(InterceptorRegistry interceptorRegistry) {
+        interceptorRegistry.addInterceptor(myLoginInterceptor).addPathPatterns("/**");
+    }
+
     @Override
     public void configurePathMatch(PathMatchConfigurer pathMatchConfigurer) {
 
@@ -45,23 +70,13 @@ public class MyWebConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-        interceptorRegistry.addInterceptor(new MyInterceptor()).addPathPatterns("/asd/**");
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry resourceHandlerRegistry) {
-
-    }
-
-    @Override
     public void addCorsMappings(CorsRegistry corsRegistry) {
 
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry viewControllerRegistry) {
-        viewControllerRegistry.addViewController("/zxc/foo").setViewName("foo");
+
     }
 
     @Override
@@ -109,22 +124,35 @@ public class MyWebConfig implements WebMvcConfigurer {
         return null;
     }
 
+    /**
+     * filter配置
+     * LoginFilter
+     * @return
+     */
     @Bean
-    public FilterRegistrationBean filterRegist(){
+    public FilterRegistrationBean myLoginFilterRegistration(){
+        log.info("LoginFilter");
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(new MyFilter());
+        filterRegistrationBean.setFilter(new MyLoginFilter());
         filterRegistrationBean.addUrlPatterns("/*");
-        System.out.println("filter");
-        log.info("filter");
         return filterRegistrationBean;
     }
 
+
+
+
+    /**
+     * SessionListener配置
+     * 监听session的创建和销毁
+     * @return
+     */
     @Bean
-    public ServletListenerRegistrationBean listenerRegist(){
+    public ServletListenerRegistrationBean listenerRegistration(){
+        log.info("listener");
         ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
         servletListenerRegistrationBean.setListener(new MyHttpSessionListener());
-        System.out.println("listener");
-        log.info("listener");
         return servletListenerRegistrationBean;
     }
+
+
 }

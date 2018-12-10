@@ -1,6 +1,6 @@
 package com.timocode.portal.controller;
 
-import com.timocode.common.util.filter.MyHttpSessionListener;
+import com.timocode.common.util.webconfig.sessionListener.MyHttpSessionListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -27,16 +27,16 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Object foo(){
-        log.info("打印日志-----------------");
+    public Object login(HttpServletRequest request){
+        log.info("登陆-----------------");
+        HttpSession session = request.getSession(true);
+        session.setAttribute("user","zxc");
         return "login";
     }
 
     @RequestMapping("/index")
     @ResponseBody
-    public Object index(HttpServletRequest request){
-        HttpSession session = request.getSession(true);
-        session.setAttribute("zxc","zxc");
+    public Object index(){
         return "index";
     }
 
