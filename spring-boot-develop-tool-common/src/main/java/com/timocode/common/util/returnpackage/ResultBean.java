@@ -1,4 +1,4 @@
-package com.timocode.common.util.returnPackage;
+package com.timocode.common.util.returnpackage;
 
 import lombok.Data;
 

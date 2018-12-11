@@ -1,6 +1,6 @@
 package com.timocode.rabbitmq.receiver;
 
-import com.timocode.rabbitmq.config.RabbitConfig;
+import com.timocode.rabbitmq.config.DirectRabbitConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-@RabbitListener(queues = RabbitConfig.QUEUE_A)
+@RabbitListener(queues = DirectRabbitConfig.QUEUE_A)
 public class MsgReceiverA2 {
 
     @RabbitHandler
