@@ -22,10 +22,4 @@ public class RabbitMQController {
     public void all(){
         msgProducer.sendAll("this is all messages");
     }
-
-    @GetMapping("/topic")
-    public void send1(){
-        msgProducer.send1("this is send1 message");
-        msgProducer.send2("this is send2 message");
-    }
 }

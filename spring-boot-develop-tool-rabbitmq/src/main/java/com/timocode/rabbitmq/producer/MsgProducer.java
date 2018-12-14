@@ -1,8 +1,6 @@
 package com.timocode.rabbitmq.producer;
 
-import com.timocode.rabbitmq.config.FanoutRabbitConfig;
-import com.timocode.rabbitmq.config.DirectRabbitConfig;
-import com.timocode.rabbitmq.config.TopicRabbitConfig;
+import com.timocode.rabbitmq.config.RabbitConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -15,9 +13,9 @@ import java.util.UUID;
 @Slf4j
 public class MsgProducer implements RabbitTemplate.ConfirmCallback {
 
-    @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    @Autowired
     public MsgProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
         rabbitTemplate.setConfirmCallback(this);
@@ -25,19 +23,11 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
 
     public void sendMsg(String content){
         CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-        rabbitTemplate.convertAndSend(DirectRabbitConfig.EXCHANGE_A, DirectRabbitConfig.ROUTINGKEY_A, content, correlationData);
+        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_A, RabbitConfig.ROUTINGKEY_A, content, correlationData);
     }
 
     public void sendAll(String content){
-        rabbitTemplate.convertAndSend(FanoutRabbitConfig.FANOUT_EXCHANGE,"",content);
-    }
-
-    public void send1(String content){
-        rabbitTemplate.convertAndSend(TopicRabbitConfig.topicExchange,"topic.message",content);
-    }
-    public void send2(String content){
-        rabbitTemplate.convertAndSend(TopicRabbitConfig.topicExchange,"topic.messages",content);
-
+        rabbitTemplate.convertAndSend(RabbitConfig.FANOUT_EXCHANGE,"",content);
     }
 
     @Override

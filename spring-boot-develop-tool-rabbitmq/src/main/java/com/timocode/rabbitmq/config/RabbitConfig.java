@@ -15,35 +15,23 @@ import org.springframework.context.annotation.Scope;
 
 @Configuration
 @Slf4j
-public class DirectRabbitConfig {
+public class RabbitConfig {
 
-    //EXCHANGE
     public static final String EXCHANGE_A = "my-mq-exchange_A";
     public static final String EXCHANGE_B = "my-mq-exchange_B";
     public static final String EXCHANGE_C = "my-mq-exchange_C";
+    public static final String FANOUT_EXCHANGE = "my-mq-exchange_FANOUT";
 
-    //QUEUE
     public static final String QUEUE_A = "QUEUE_A";
     public static final String QUEUE_B = "QUEUE_B";
     public static final String QUEUE_C = "QUEUE_C";
 
-    //ROUTINGKEY
     public static final String ROUTINGKEY_A = "spring-boot-rootingKey_A";
     public static final String ROUTINGKEY_B = "spring-boot-rootingKey_B";
     public static final String ROUTINGKEY_C = "spring-boot-rootingKey_C";
 
-    /**
-     * 创建ConnectionFactory
-     * 可以创建多个，通过Bean name区分
-     * @param host
-     * @param port
-     * @param username
-     * @param password
-     * @param virtualhost
-     * @return
-     */
     @Bean(name = "firstConnectionFactory")
-    @Primary    //默认选用
+    @Primary
     public ConnectionFactory firstConnectionFactory(
             @Value("${spring.rabbitmq.host}") String host,
             @Value("${spring.rabbitmq.port}") int port,
@@ -67,9 +55,6 @@ public class DirectRabbitConfig {
         return rabbitTemplate;
     }
 
-    /**
-     * Direct模式 RoutingKey = BindingKey
-     */
     @Bean
     public DirectExchange ExchangeA() {
         return new DirectExchange(EXCHANGE_A);
@@ -98,11 +83,33 @@ public class DirectRabbitConfig {
 
     @Bean
     public Binding binding(){
-        return BindingBuilder.bind(queueA()).to(ExchangeA()).with(DirectRabbitConfig.ROUTINGKEY_A);
+        return BindingBuilder.bind(queueA()).to(ExchangeA()).with(RabbitConfig.ROUTINGKEY_A);
     }
     @Bean
     public Binding bindingB(){
-        return BindingBuilder.bind(queueB()).to(ExchangeA()).with(DirectRabbitConfig.ROUTINGKEY_B);
+        return BindingBuilder.bind(queueB()).to(ExchangeA()).with(RabbitConfig.ROUTINGKEY_B);
+    }
+
+
+    //广播模式
+    @Bean
+    FanoutExchange fanoutExchange(){
+        return new FanoutExchange(RabbitConfig.FANOUT_EXCHANGE);
+    }
+
+    @Bean
+    Binding bindingExchangeA(Queue queueA, FanoutExchange fanoutExchange){
+        return BindingBuilder.bind(queueA).to(fanoutExchange);
+    }
+
+    @Bean
+    Binding bindingExchangeB(Queue queueB, FanoutExchange fanoutExchange){
+        return BindingBuilder.bind(queueB).to(fanoutExchange);
+    }
+
+    @Bean
+    Binding bindingExchangeC(Queue queueC, FanoutExchange fanoutExchange){
+        return BindingBuilder.bind(queueC).to(fanoutExchange);
     }
 
 }
